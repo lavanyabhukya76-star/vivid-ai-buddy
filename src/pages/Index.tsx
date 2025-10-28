@@ -91,27 +91,27 @@ const Index = () => {
       <InteractiveBackground />
 
       <header className="sticky top-0 z-10 border-b border-border bg-card/80 backdrop-blur-lg">
-        <div className="container mx-auto flex items-center gap-3 px-4 py-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-medium">
-            <Bot className="h-6 w-6 text-primary-foreground" />
+        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-medium">
+            <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-foreground">AI Assistant</h1>
+            <h1 className="text-lg sm:text-xl font-semibold text-foreground">AI Assistant</h1>
             <p className="text-xs text-muted-foreground">Your intelligent helper</p>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto flex flex-1 flex-col px-4 py-6">
-        <div className="flex flex-1 flex-col space-y-6">
+      <main className="flex flex-1 flex-col pb-24 sm:pb-28">
+        <div className="flex flex-1 flex-col">
           {messages.length === 0 ? (
-            <div className="flex flex-1 items-center justify-center">
+            <div className="flex flex-1 items-center justify-center px-3 sm:px-4">
               <div className="w-full max-w-4xl">
                 <SamplePrompts onSelectPrompt={handleSendMessage} />
               </div>
             </div>
           ) : (
-            <div className="flex-1 space-y-4 overflow-y-auto">
+            <div className="flex-1 space-y-3 sm:space-y-4 overflow-y-auto px-3 sm:px-4 py-4 sm:py-6">
               {messages.map((message) => (
                 <ChatMessage
                   key={message.id}
@@ -124,11 +124,11 @@ const Index = () => {
               <div ref={messagesEndRef} />
             </div>
           )}
+        </div>
 
-          <div className="sticky bottom-0 bg-background/80 backdrop-blur-lg pt-4">
-            <div className="mx-auto max-w-4xl">
-              <ChatInput onSend={handleSendMessage} disabled={isTyping} />
-            </div>
+        <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-border p-3 sm:p-4 safe-area-bottom">
+          <div className="mx-auto max-w-4xl">
+            <ChatInput onSend={handleSendMessage} disabled={isTyping} />
           </div>
         </div>
       </main>

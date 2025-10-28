@@ -34,16 +34,16 @@ export const ChatInput = ({ onSend, disabled }: ChatInputProps) => {
         onKeyDown={handleKeyDown}
         placeholder="Ask me anything..."
         disabled={disabled}
-        className="min-h-[60px] max-h-[120px] resize-none rounded-2xl border-border bg-card focus-visible:ring-primary"
+        className="min-h-[50px] sm:min-h-[60px] max-h-[120px] resize-none rounded-2xl border-border bg-card focus-visible:ring-primary text-sm sm:text-base"
         rows={1}
       />
       <Button
         type="submit"
         disabled={!message.trim() || disabled}
         size="icon"
-        className="h-[60px] w-[60px] shrink-0 rounded-2xl bg-gradient-to-br from-primary to-purple-600 hover:opacity-90 transition-opacity shadow-medium"
+        className="h-[50px] w-[50px] sm:h-[60px] sm:w-[60px] shrink-0 rounded-2xl bg-gradient-to-br from-primary to-purple-600 hover:opacity-90 active:opacity-80 transition-opacity shadow-medium"
       >
-        <Send className="h-5 w-5" />
+        <Send className="h-4 w-4 sm:h-5 sm:w-5" />
       </Button>
     </form>
   );

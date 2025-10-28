@@ -16,24 +16,24 @@ const prompts = [
 
 export const SamplePrompts = ({ onSelectPrompt }: SamplePromptsProps) => {
   return (
-    <div className="space-y-4 animate-fade-in">
-      <h2 className="text-center text-2xl font-semibold text-foreground">
+    <div className="space-y-3 sm:space-y-4 animate-fade-in">
+      <h2 className="text-center text-xl sm:text-2xl font-semibold text-foreground px-2">
         What can I help you with?
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
         {prompts.map((prompt, index) => {
           const Icon = prompt.icon;
           return (
             <Card
               key={index}
               onClick={() => onSelectPrompt(prompt.text)}
-              className="group cursor-pointer border-border bg-card p-4 transition-all hover:scale-105 hover:shadow-medium"
+              className="group cursor-pointer border-border bg-card p-3 sm:p-4 transition-all hover:scale-105 hover:shadow-medium active:scale-95"
             >
-              <div className="flex items-start gap-3">
-                <div className={`rounded-lg bg-gradient-to-br ${prompt.color} p-2 shadow-soft`}>
-                  <Icon className="h-5 w-5 text-white" />
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className={`rounded-lg bg-gradient-to-br ${prompt.color} p-1.5 sm:p-2 shadow-soft shrink-0`}>
+                  <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
-                <p className="text-sm text-card-foreground group-hover:text-primary transition-colors">
+                <p className="text-xs sm:text-sm text-card-foreground group-hover:text-primary transition-colors">
                   {prompt.text}
                 </p>
               </div>
