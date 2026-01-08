@@ -66,6 +66,10 @@ All colors MUST be HSL.
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 3D Glow Effects */
+    --glow-accent: 0 0 20px hsl(193 100% 50% / 0.5), 0 0 40px hsl(193 100% 50% / 0.3);
+    --glow-primary: 0 0 20px hsl(263 70% 50% / 0.5), 0 0 40px hsl(263 70% 50% / 0.3);
 
     --sidebar-background: 0 0% 98%;
 
