@@ -4,6 +4,7 @@ import { ChatMessage } from "@/components/ChatMessage";
 import { ChatInput } from "@/components/ChatInput";
 import { TypingIndicator } from "@/components/TypingIndicator";
 import { SamplePrompts } from "@/components/SamplePrompts";
+import { FloatingOrb } from "@/components/FloatingOrb";
 import { Bot } from "lucide-react";
 import { toast } from "sonner";
 import { streamChat } from "@/lib/streamChat";
@@ -19,6 +20,7 @@ const Index = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -27,6 +29,10 @@ const Index = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping]);
+
+  const handleOrbClick = () => {
+    inputRef.current?.focus();
+  };
 
   const handleSendMessage = async (text: string) => {
     const userMessage: Message = {
@@ -75,7 +81,6 @@ const Index = () => {
           toast.error("Failed to get response", {
             description: error,
           });
-          // Remove the partial message if there was an error
           setMessages(prev => prev.filter(m => m.id !== assistantId));
         }
       });
@@ -92,8 +97,11 @@ const Index = () => {
 
       <header className="sticky top-0 z-10 border-b border-border bg-card/80 backdrop-blur-lg">
         <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 sm:py-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-medium">
-            <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
+          <div className="relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-accent/20 blur-lg animate-pulse" />
+            <div className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-gradient-to-br from-accent to-primary shadow-[0_0_20px_hsl(var(--accent)/0.5)]">
+              <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+            </div>
           </div>
           <div>
             <h1 className="text-lg sm:text-xl font-semibold text-foreground">AI Assistant</h1>
@@ -105,8 +113,9 @@ const Index = () => {
       <main className="flex flex-1 flex-col pb-24 sm:pb-28">
         <div className="flex flex-1 flex-col">
           {messages.length === 0 ? (
-            <div className="flex flex-1 items-center justify-center px-3 sm:px-4">
-              <div className="w-full max-w-4xl">
+            <div className="flex flex-1 flex-col items-center justify-center px-3 sm:px-4 gap-8">
+              <FloatingOrb isThinking={isTyping} onClick={handleOrbClick} />
+              <div className="w-full max-w-4xl mt-12">
                 <SamplePrompts onSelectPrompt={handleSendMessage} />
               </div>
             </div>
@@ -128,7 +137,7 @@ const Index = () => {
 
         <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-border p-3 sm:p-4 safe-area-bottom">
           <div className="mx-auto max-w-4xl">
-            <ChatInput onSend={handleSendMessage} disabled={isTyping} />
+            <ChatInput onSend={handleSendMessage} disabled={isTyping} inputRef={inputRef} />
           </div>
         </div>
       </main>
